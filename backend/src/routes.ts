@@ -4,6 +4,7 @@ const router = Router();
 
 router.get('/test', (req: Request, res: Response) => {
     return res.json({ Projeto: 'Pizzaria' })
+    //throw new Error('Erro ao fazer essa requisição')
 });
 
 export { router }; 
