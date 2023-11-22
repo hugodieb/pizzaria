@@ -8,16 +8,24 @@ class CreateProductController{
 
     const createProduct = new CreateProductService();
 
-    const product = await createProduct.execute({
-      name,
-      price,
-      description,
-      banner,
-      category_id
-    });
+    if(!req.file){
+      throw new Error("Tem que carregar a foto do produto.")
+    }else{
 
-    return res.json(product);
-    
+      const { originalname, filename } = req.file;
+
+      console.log(originalname, " ", filename)
+
+      const product = await createProduct.execute({
+        name,
+        price,
+        description,
+        banner: '',
+        category_id
+      });
+  
+      return res.json(product);
+    }  
   }
 }
 
