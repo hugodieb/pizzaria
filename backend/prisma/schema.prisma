@@ -63,7 +63,7 @@ model Order {
 
 model Item {
   id String @id @default(uuid())
-  mount Int
+  amount Int
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 
