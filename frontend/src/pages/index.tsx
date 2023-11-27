@@ -29,9 +29,12 @@ export default function Home() {
           type="submit"
           loading={false}        
         >
-          Logar aqui
+          Entrar
         </Button>
       </form>
+
+      <a className={styles.text}>Não possui uma conta ainda? Cadastre-se aqui!</a>
+
     </div>
    </div>
    </>
