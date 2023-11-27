@@ -6,7 +6,8 @@
       "@stylesmodule/*": ["src/components/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@contexts/*":["src/contexts/*"]
     },
     "lib": [
       "dom",
