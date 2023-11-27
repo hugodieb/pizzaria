@@ -12,13 +12,20 @@ export default function Home() {
   return (
    <>
    <Head>
-    <title>Pizzafun-Bem vindo!</title>
+    <title>Faça seu cadastro agora!</title>
    </Head>
    <div className={styles.containerCenter}>
     <Image src={logopizzaria} alt='PizzariaFun' />
 
     <div className={styles.login}>
+      
+      <h2>Criar sua conta no PizzaFun <span>\o/</span></h2>
+
       <form >
+        <Input
+         placeholder='Seu nome completo aqui...'
+         type='text'
+        />
         <Input
          placeholder='email@exemplo.com'
          type='text'
@@ -31,14 +38,14 @@ export default function Home() {
           type="submit"
           loading={false}        
         >
-          Entrar
+          Cadastrar
         </Button>
       </form>
 
-      <Link href="/signup"
+      <Link href="/"
        className={styles.text}
       >        
-        Não possui uma conta ainda? Cadastre-se aqui!        
+        Já possui uma conta? Faça login!        
       </Link>      
 
     </div>
