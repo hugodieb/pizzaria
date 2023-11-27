@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../../styles/home.module.scss'
-import logopizzaria from '../../public/pizzaria.png'
+import styles from '@styles/home.module.scss'
+import logopizzaria from '@public/pizzaria.png'
 
-import { Input } from '../components/ui/Input'
+import { Input } from '@components/ui/Input'
 
 export default function Home() {
   return (
