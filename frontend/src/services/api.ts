@@ -7,11 +7,13 @@ export function setupAPIClient(ctx = undefined){
   let cookies = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL,
     headers: {
-      Authorization: `Bearer ${cookies['@pizzafun.token']}`
+      Authorization: `Bearer ${cookies[process.env.NAME_TOKEN]}`
     }
   })
+
+  console.log("baseurl ", process.env.BASE_URL)
 
   api.interceptors.response.use(response => {
     return response;

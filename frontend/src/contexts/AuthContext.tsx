@@ -1,6 +1,6 @@
-import { type } from 'os';
 import { createContext, ReactNode, useState } from 'react';
-import { destroyCookie } from 'nookies';
+import { api } from '@services/apiClient'
+import { destroyCookie, setCookie } from 'nookies';
 import Router from 'next/router';
 
 type AuthContextData = {
@@ -27,7 +27,7 @@ type AuthProviderProps = {
 
 export function signOut(){
   try {
-    destroyCookie(undefined, '@pizzafun.token')
+    destroyCookie(undefined, process.env.NAME_TOKEN)
     Router.push('/');
   } catch (error) {
     error
@@ -41,8 +41,31 @@ export function AuthProvider({ children }: AuthProviderProps){
   const isAuthenticated = !!user;
 
   async function signIn({ email, password }: SignInProps){
-    console.log("email ", email);
-    console.log("senha ", password);
+    try {
+      const response = await api.post('/session', {
+        email, password
+      })
+      //console.log(response.data)
+      const { id, name, token } = response.data;
+
+      setCookie(undefined, '@pizzafun.token', token, {
+        maxAge: 60 * 60 * 24 * 30, //expira em 1 mes
+        path: "/" // quais caminhos terão acesso ao cookie(no caso todos)
+      })
+
+      setUser({
+        id,
+        name,
+        email,
+      })
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+      Router.push('/signup');
+
+    } catch (error) {
+      console.log("Erro ao acessa ", error)
+    }
   }
 
   return(
