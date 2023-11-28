@@ -7,7 +7,8 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@public/*": ["public/*"],
-      "@contexts/*":["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@services/*": ["src/services/*"],
     },
     "lib": [
       "dom",

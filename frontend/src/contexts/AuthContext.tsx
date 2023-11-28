@@ -1,10 +1,13 @@
 import { type } from 'os';
 import { createContext, ReactNode, useState } from 'react';
+import { destroyCookie } from 'nookies';
+import Router from 'next/router';
 
 type AuthContextData = {
   user: UserProps;
   isAuthenticated: boolean;
   signIn: (credentials: SignInProps) => Promise<void>;
+  signOut: () => void;
 }
 
 type UserProps = {
@@ -22,6 +25,15 @@ type AuthProviderProps = {
   children: ReactNode;
 }
 
+export function signOut(){
+  try {
+    destroyCookie(undefined, '@pizzafun.token')
+    Router.push('/');
+  } catch (error) {
+    error
+  }
+}
+
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps){
@@ -34,7 +46,7 @@ export function AuthProvider({ children }: AuthProviderProps){
   }
 
   return(
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
