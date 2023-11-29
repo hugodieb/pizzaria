@@ -74,7 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps){
       Router.push('/signup');
 
     } catch (error) {
-      console.log("Erro ao acessa ", error)
+      toast.error("Deu algo errado no seu login.")
     }
   }
 
@@ -84,11 +84,11 @@ export function AuthProvider({ children }: AuthProviderProps){
         name, email, password
       })
 
-      toast.success("Cadastro criado sucesso.")
+      toast.success("Cadastro criado com sucesso.")
 
       Router.push('/dashboard')
     } catch (error) {
-      console.log("Erro ao cadastrar usuario ", error)
+      toast.error("Erro ao cadastrar usuário.")
     }
 
   }
