@@ -7,7 +7,8 @@ module.exports = nextConfig
 
 module.exports = {
   env: {
-    BASE_URL: process.env.BASE_URL
+    BASE_URL: process.env.BASE_URL,
+    NAME_TOKEN: process.env.NAME_TOKEN,
   },
 };
 

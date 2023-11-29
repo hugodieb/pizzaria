@@ -11,9 +11,7 @@ export function setupAPIClient(ctx = undefined){
     headers: {
       Authorization: `Bearer ${cookies[process.env.NAME_TOKEN]}`
     }
-  })
-
-  console.log("baseurl ", process.env.BASE_URL)
+  })  
 
   api.interceptors.response.use(response => {
     return response;

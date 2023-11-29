@@ -7,8 +7,39 @@ import { Input } from '@components/ui/Input'
 import { Button } from '@components/ui/Button'
 
 import Link from 'next/link'
+import { useState, FormEvent, useContext } from 'react'
+import { AuthContext } from '@contexts/AuthContext'
 
-export default function Home() {
+export default function Signup() {
+  const {signUp} = useContext(AuthContext);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignup(event: FormEvent){
+    event.preventDefault();
+
+    setLoading(true);
+
+    if(name === '' || email === '' || password === ''){
+      console.log("falta dados aí..")
+      return;
+    }
+
+    let data = {
+      name,
+      email,
+      password,
+    }
+
+    await signUp(data);
+
+    setLoading(false)
+
+  }
+
   return (
    <>
    <Head>
@@ -21,22 +52,28 @@ export default function Home() {
       
       <h2>Criar sua conta no PizzaFun <span>\o/</span></h2>
 
-      <form >
+      <form onSubmit={handleSignup} >
         <Input
-         placeholder='Seu nome completo aqui...'
+         placeholder='Seu nome de usuário.'
          type='text'
+         value={name}
+         onChange={(e) => setName(e.target.value) }
         />
         <Input
          placeholder='email@exemplo.com'
          type='text'
+         value={email}
+         onChange={(e) => setEmail(e.target.value) }
         />
         <Input
-         placeholder='senha'
+         placeholder='Crie sua senha'
          type='password'
+         value={password}
+         onChange={(e) => setPassword(e.target.value) }
         />
         <Button
           type="submit"
-          loading={false}        
+          loading={loading}        
         >
           Cadastrar
         </Button>
