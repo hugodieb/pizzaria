@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useEffect } from 'react';
 import { api } from '@services/apiClient'
-import { destroyCookie, setCookie } from 'nookies';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -45,8 +45,32 @@ export function signOut(){
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps){
-  const [user, setUser] = useState<UserProps>()
+  const [user, setUser] = useState<UserProps>() 
   const isAuthenticated = !!user;
+  const envToken = process.env.NAME_TOKEN
+
+  useEffect(() => {   
+    
+    const { [envToken]: token } = parseCookies();
+    alert(token)
+    if(token){
+      api.get('/whoamy').then(response => {
+        
+        const { id, name, email } = response.data;
+
+        setUser({
+          id,
+          name,
+          email,
+        })        
+
+      })
+      .catch(() => {
+        signOut();
+      })
+    }
+    
+  }, [])
 
   async function signIn({ email, password }: SignInProps){
     try {
