@@ -1,3 +1,5 @@
+import { withSSRAuth } from "@utils/withSSRAuth"
+
 export default function Dashboard(){
   return(
     <div>
@@ -5,3 +7,9 @@ export default function Dashboard(){
     </div>
   )
 }
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})

@@ -71,7 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps){
 
       toast.success("Login com sucesso.")
 
-      Router.push('/signup');
+      Router.push('/dashboard');
 
     } catch (error) {
       toast.error("Deu algo errado no seu login.")
