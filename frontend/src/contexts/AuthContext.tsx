@@ -33,7 +33,9 @@ type AuthProviderProps = {
   children: ReactNode;
 }
 
-export function signOut(){
+export const AuthContext = createContext({} as AuthContextData)
+
+export function signOut(){  
   try {
     destroyCookie(undefined, process.env.NAME_TOKEN)
     Router.push('/');
@@ -42,18 +44,16 @@ export function signOut(){
   }
 }
 
-export const AuthContext = createContext({} as AuthContextData)
-
 export function AuthProvider({ children }: AuthProviderProps){
   const [user, setUser] = useState<UserProps>() 
   const isAuthenticated = !!user;
-  const envToken = process.env.NAME_TOKEN
-
+  
   useEffect(() => {   
     
-    const { [envToken]: token } = parseCookies();
-    alert(token)
+    const { [process.env.NAME_TOKEN]: token } = parseCookies();
+   
     if(token){
+      
       api.get('/whoamy').then(response => {
         
         const { id, name, email } = response.data;

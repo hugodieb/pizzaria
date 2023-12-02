@@ -9,6 +9,7 @@
       "@public/*": ["public/*"],
       "@contexts/*": ["src/contexts/*"],
       "@services/*": ["src/services/*"],
+      "@pages/*": ["src/pages/*"],
     },
     "lib": [
       "dom",

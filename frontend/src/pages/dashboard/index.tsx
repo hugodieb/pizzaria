@@ -1,10 +1,20 @@
 import { withSSRAuth } from "@utils/withSSRAuth"
+import Head from "next/head"
+import { Header } from '@components/Header/'
 
 export default function Dashboard(){
   return(
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <>
+    <Head>
+      <title>
+        Dashboard Pizzafun 
+      </title>
+      </Head>
+
+      <div>
+        <Header />
+      </div>    
+    </>
   )
 }
 
