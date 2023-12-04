@@ -9,14 +9,14 @@ class DetailOrderService{
 
     const detailOrder = await prismaClient.item.findMany({
       where: {
-        id: order_id,
+        order_id: order_id,
       },
       include: {
         product: true,
         order: true,
       }
     });
-
+   
     return detailOrder;
 
   }
