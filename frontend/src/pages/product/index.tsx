@@ -4,8 +4,9 @@ import { Header } from '@components/Header/';
 import styles from '@pages/product/styles.module.scss';
 import { GrAdd } from 'react-icons/gr'
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { setupAPIClient } from "@services/api";
+import { toast } from "react-toastify";
 
 type ItemProps = {
   id: string;
@@ -18,6 +19,10 @@ interface CategoryProps{
 
 
 export default function Product({categoryList}: CategoryProps){
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+
 
   const [avatarUrl, setAvatarUrl] = useState('');
   const [imageAvatar, setImageAvatar] = useState(null);
@@ -47,6 +52,41 @@ export default function Product({categoryList}: CategoryProps){
     setCategorySelected(event.target.value);
   }
 
+  async function handleSaveProduct(event: FormEvent){
+    event.preventDefault();
+
+    try {
+      
+      const data = new FormData();
+
+      if(name === '' || price === '' || description === '' || imageAvatar === null){
+        toast.error("Preencha todos os campos.")
+        return;
+      }
+
+      data.append('name', name);
+      data.append('price', price);
+      data.append('description', description);
+      data.append('file', imageAvatar);
+      data.append('category_id', categories[categorySelected].id);
+
+      const apiClient = setupAPIClient();
+      await apiClient.post('/product', data);
+
+      toast.success("Produto cadastrado com sucesso!")
+
+    } catch (error) {
+      toast.error("Oops...erro ao cadastrar um novo produto.")
+      console.log(error);
+    }
+
+    setName('');
+    setPrice('');
+    setDescription('');
+    setImageAvatar(null);
+    setAvatarUrl('');
+  }
+
   return(
     <>
     <Head>
@@ -65,6 +105,7 @@ export default function Product({categoryList}: CategoryProps){
 
         <form
          className={styles.form}
+         onSubmit={handleSaveProduct}
         >
 
           <label className={styles.labelAvatar}>
@@ -83,8 +124,8 @@ export default function Product({categoryList}: CategoryProps){
                 className={styles.preview}
                 src={avatarUrl}
                 alt="Produto"
-                width={250}
-                height={250}
+                width={1}
+                height={1}
               />  
             )}
 
@@ -107,17 +148,23 @@ export default function Product({categoryList}: CategoryProps){
            type="text"
            className={styles.input}
            placeholder="Digite o nome do produto"
+           value={name}
+           onChange={(e) => setName(e.target.value)}
           />
 
           <input
             type="text"
             className={styles.input}
             placeholder="Preço do produto"
+            value={price}
+           onChange={(e) => setPrice(e.target.value)}
           />
 
           <textarea
             className={styles.input}            
             placeholder="Descrição do produto..."
+            value={description}
+           onChange={(e) => setDescription(e.target.value)}
           />
 
           <button
