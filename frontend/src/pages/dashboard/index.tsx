@@ -116,7 +116,7 @@ export default function Dashboard({orders}: dashProps){
             onRequestClose={handleCloseModal}
             order={modalItem}
           />
-        ) }
+        )}
 
       </div>    
     </>
