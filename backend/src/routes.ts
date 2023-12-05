@@ -5,12 +5,16 @@ import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { isAuthenticated } from '../src/midlewares/isAuthenticated';
+
 import { CreateCategoryController } from '../src/controllers/category/CreateCategoryController';
 import { ListCategoryController } from '../src/controllers/category/ListCategoryController';
+
 import { CreateProductController } from '../src/controllers/product/CreateProductController';
 import { ListProductByCategoryController } from './controllers/product/ListProductByCategoryController';
+
 import { CreateOrderController } from './controllers/order/CreateOrderController';
 import { DeleteOrderController } from './controllers/order/DeleteOrderController';
+
 import { AddItemController } from './controllers/order/AddItemController';
 import { SendOrderController } from './controllers/order/SendOrderController';
 import { ListOrderController } from './controllers/order/ListOrderController';
