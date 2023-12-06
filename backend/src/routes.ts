@@ -29,19 +29,19 @@ const router = Router();
 
 const upload = multer(uploadConfig.upload("./images"));
 
-router.post('/users', new CreateUserController().handle);
+router.post('/api/users', new CreateUserController().handle);
 
-router.post('/session', new AuthUserController().handle);
+router.post('/api/session', new AuthUserController().handle);
 
-router.get('/whoamy', isAuthenticated, new DetailUserController().handle);
+router.get('/api/whoamy', isAuthenticated, new DetailUserController().handle);
 
 // Rotas Category
 
-router.post('/category', isAuthenticated, new CreateCategoryController().handle);
-router.get('/category', isAuthenticated, new ListCategoryController().handle);
+router.post('/api/category', isAuthenticated, new CreateCategoryController().handle);
+router.get('/api/category', isAuthenticated, new ListCategoryController().handle);
 
 // Rotas Product
-router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle);
+router.post('/api/product', isAuthenticated, upload.single('file'), new CreateProductController().handle);
 router.get('/category/products', isAuthenticated, new ListProductByCategoryController().handle);
 
 //Rotas de Order
@@ -50,8 +50,8 @@ router.delete('/order', isAuthenticated, new DeleteOrderController().handle);
 router.post('/order/add', isAuthenticated, new AddItemController().handle);
 router.delete('/order/remove', isAuthenticated, new DeleteItemController().handle);
 router.put('/order/send', isAuthenticated, new SendOrderController().handle);
-router.get('/orders', isAuthenticated, new ListOrderController().handle);
-router.get('/order/detail', isAuthenticated, new DetailOrderController().handle);
-router.put('/order/finish', isAuthenticated, new FinishOrderController().handle); 
+router.get('/api/orders', isAuthenticated, new ListOrderController().handle);
+router.get('/api/order/detail', isAuthenticated, new DetailOrderController().handle);
+router.put('/api/order/finish', isAuthenticated, new FinishOrderController().handle); 
 
 export { router }; 
