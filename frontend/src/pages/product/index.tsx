@@ -71,7 +71,7 @@ export default function Product({categoryList}: CategoryProps){
       data.append('category_id', categories[categorySelected].id);
 
       const apiClient = setupAPIClient();
-      await apiClient.post('/product', data);
+      await apiClient.post('/api/product', data);
 
       toast.success("Produto cadastrado com sucesso!")
 
@@ -185,7 +185,7 @@ export default function Product({categoryList}: CategoryProps){
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupAPIClient(ctx);
 
-  const response = await apiClient.get('/category'); 
+  const response = await apiClient.get('/api/category'); 
 
   return {
     props: {

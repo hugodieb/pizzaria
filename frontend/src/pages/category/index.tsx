@@ -17,7 +17,7 @@ export default function Category(){
     }
     
     const apiClient = setupAPIClient();
-    await apiClient.post("/category", {
+    await apiClient.post("/api/category", {
       name: name
     })
 

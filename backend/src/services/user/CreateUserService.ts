@@ -10,6 +10,8 @@ interface UserRequest{
 class CreateUserService{
   async execute({name, email, password}: UserRequest){
 
+      console.log("email", email)
+
     if(!email) {
       throw new Error("Email obrigatório.")
     }

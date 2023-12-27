@@ -54,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderProps){
    
     if(token){
       
-      api.get('/whoamy').then(response => {
+      api.get('/api/whoamy').then(response => {
         
         const { id, name, email } = response.data;
 
@@ -74,7 +74,7 @@ export function AuthProvider({ children }: AuthProviderProps){
 
   async function signIn({ email, password }: SignInProps){
     try {
-      const response = await api.post('/session', {
+      const response = await api.post('/api/session', {
         email, password
       })
      
@@ -104,7 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps){
 
   async function signUp({name, email, password}: SignUpProps) {
     try {
-      const response = api.post('/users', {
+      const response = api.post('/api/users', {
         name, email, password
       })
 

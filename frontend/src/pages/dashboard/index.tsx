@@ -56,7 +56,7 @@ export default function Dashboard({orders}: dashProps){
     
     const apiClient = setupAPIClient();  
 
-    const response = await apiClient.get('/order/detail', {
+    const response = await apiClient.get('/api/order/detail', {
       params:{
         order_id: id
       }
@@ -69,11 +69,11 @@ export default function Dashboard({orders}: dashProps){
 
   async function handleFinishItem(id: string){
     const apiClient = setupAPIClient();
-    apiClient.put('/order/finish', {
+    apiClient.put('/api/order/finish', {
       order_id: id,
     })
 
-    const response = await apiClient.get('/orders');
+    const response = await apiClient.get('/api/orders');
 
     setOrderList(response.data)
     setModalVisible(false);
@@ -82,7 +82,7 @@ export default function Dashboard({orders}: dashProps){
 
   async function handleRefreshOrders(){
     const apiClient = setupAPIClient();
-    const response = await apiClient.get('/orders');
+    const response = await apiClient.get('/api/orders');
 
     setOrderList(response.data);
   }
@@ -149,7 +149,7 @@ export default function Dashboard({orders}: dashProps){
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupAPIClient(ctx);
 
-  const response = await apiClient.get('/orders');
+  const response = await apiClient.get('/api/orders');
 
   return {
     props: {

@@ -1,0 +1,10 @@
+version: '2'
+services:
+  nginx:
+    container_name: pizzafun_nginx
+    image: nginx:alpine
+    network_mode: "host"
+    volumes:
+      - ../nginx/default_local:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
